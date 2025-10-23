@@ -2,20 +2,26 @@ name: Test Deployment Protection
 
 on:
   workflow_dispatch:
+    inputs:
+      test_input:
+        description: "Type anything here to test workflow inputs"
+        required: true
+        default: "hello-world"
 
 jobs:
   deploy:
     name: Fake Deploy Job
     runs-on: ubuntu-latest
+
     environment:
-      name: production
+      name: production  # must match your protected environment
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Print the input
+        run: echo "User entered: ${{ inputs.test_input }}"
 
       - name: Simulate deployment
         run: |
           echo "Starting fake deployment..."
-          sleep 10
-          echo "Deployment step complete (waiting for approval to continue)"
+          sleep 5
+          echo "Deployment finished successfully for input: '${{ inputs.test_input }}'"
