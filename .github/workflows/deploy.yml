@@ -12,13 +12,12 @@ jobs:
   deploy:
     name: Fake Deploy Job
     runs-on: ubuntu-latest
-
     environment:
-      name: production  # must match your protected environment
-
+      name: production
     steps:
       - name: Print the input
-        run: echo "User entered: ${{ inputs.test_input }}"
+        run: |
+          echo "User entered: ${{ inputs.test_input }}"
 
       - name: Simulate deployment
         run: |
